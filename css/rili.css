@@ -18,21 +18,40 @@
     font-size: 50px;
     font-weight: 100;
     width: 99px;
-    height: 81px;
-    padding: 18px 0 0 0;
+    height: 99px;
+    line-height: 99px;
+    padding: 0px;
     margin: 1px 0 0 1px;
     text-align: center;
+    vertical-align: middle;
     float: left;
     background: #000;
 }
-
-#calendar .label:hover {
+#calendar .day{
+    width: 199px;
+}
+#calendar .day span{
+    font-size: 12px;
+    display: block;
+    margin-top: 10px;
+    word-spacing: 5px;
+    color: #FFF0A5;
+}
+#calendar .blank{
+    width: 199px;
+    background-color: #969696;
+}
+#calendar .day:hover {
     background: #ff1493;
     color:white;
 }
 
 #calendar .label.today {
     background: #399afe;
+}
+
+#calendar .label.noted {
+    background: #5DBD43;
 }
 
 #calendar .label.bold {

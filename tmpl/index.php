@@ -16,8 +16,24 @@
         <script src="js/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/bootstrap-transition.js" type="text/javascript" charset="utf-8"></script>
         <script>
+            var year = <?=$year?>;
+            var month = <?=$month?>;
             $(document).ready(function() {
-                $('.label').tipsy({gravity: 's'});
+                $('.day').tipsy({gravity: 's'});
+                $('.next').bind('click',function(){
+                    if(++month>12){
+                        month=1;
+                        year++;
+                    }
+                    window.location.href='?date='+year+'-'+month;
+                });
+                $('.prev').bind('click',function(){
+                    if(--month<0){
+                        month = 12;
+                        year--;
+                    }
+                    window.location.href='?date='+year+'-'+month;
+                });
                 $('.day').bind('dblclick',function(){
                     var d = $(this).attr('data-date').split('/');
                     $('#newNote').html($(this).attr('original-title'));
@@ -58,7 +74,7 @@
         <div id="header">
             日历笔记 - 此贡献来自于
             <a href="http://weibo.com/julyshine">
-                zou
+                zouliming888@gmail.com
             </a>
             .
         </div>
@@ -82,10 +98,25 @@
                 ?>
                 <div class="clear"></div>
                 <?
+                foreach($lastMonthDays as $d){
+                    echo '<div class="label blank" style="display: block; ">'.$d.'</div>';
+                }
+                $xingqiNum = $monthFirstDay;
                 for($i=1;$i<$monthDayCount+1;$i++){
+                    $n = isset($note[$i])?$note[$i]['note']:'';
+                    $xingqiNum = $xingqiNum>6?0:$xingqiNum;
+                    $xingqi = $xingqiArray[$xingqiNum++];
+                    $g = 'n';
+                    if($i%14==0){
+                        $g = 'e';
+                    }elseif($i%14==1){
+                        $g = 'w';
+                    }else{
+                        $g = 's';
+                    }
                 ?>
-                <div data-date="<?=$year.'/'.$month.'/'.$i?>" class="label day <?=$is_current_month&&$i==$day?'today':''?>" original-title="<?=@$note[$i]?>" style="display: block; ">
-                    <?=$i?>
+                <div gravity="<?=$g?>" data-date="<?=$year.'/'.$month.'/'.$i?>" class="label day <?=empty($n)?'':'noted'?> <?=$is_current_month&&$i==$day?'today':''?>" original-title="<?=$n?>" style="display: block; ">
+                    <?=$i?><span><?=$xingqi?></span>
                 </div>
                 <?
                 }
