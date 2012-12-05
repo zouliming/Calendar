@@ -11,13 +11,14 @@
         <link rel="stylesheet" href="css/rili.css" type="text/css" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="css/bootstrap-responsive.css" type="text/css" media="screen" title="no title" charset="utf-8">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
         <script src="js/tipsy.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/bootstrap-modal.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/bootstrap-transition.js" type="text/javascript" charset="utf-8"></script>
         <script>
             var year = <?=$year?>;
             var month = <?=$month?>;
+            var editEle = false;
             $(document).ready(function() {
                 $('.day').tipsy({gravity: 's'});
                 $('.next').bind('click',function(){
@@ -35,6 +36,7 @@
                     window.location.href='?date='+year+'-'+month;
                 });
                 $('.day').bind('dblclick',function(){
+                    editEle = $(this);
                     var d = $(this).attr('data-date').split('/');
                     $('#newNote').html($(this).attr('original-title'));
                     var year = d[0],month = d[1],day = d[2];
@@ -58,7 +60,7 @@
                         dataType:"json",
                         success: function(data){
                             if(data.status==1){
-                                return true;
+                                editEle.attr('original-title',note);
                             }else{
                                return false; 
                             }
@@ -74,7 +76,7 @@
         <div id="header">
             日历笔记 - 此贡献来自于
             <a href="http://weibo.com/julyshine">
-                zouliming888@gmail.com
+                邹立明
             </a>
             .
         </div>

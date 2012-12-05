@@ -41,9 +41,10 @@
     $n = array();
     $xingqi = $monthFirstDay;
     foreach($notes as $note){
+        $xingqi = $xingqi++%6==0?$xingqi:0;
         $n[$note['n_day']] = array(
             'note'=>$note['n_content'],
-            'xingqi'=>$xingqiArray[$xingqi++]
+            'xingqi'=>$xingqiArray[$xingqi]
         );
     }
     $vars['note'] = $n;

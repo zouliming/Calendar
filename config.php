@@ -5,8 +5,8 @@ $db_conf = array(
 	'driver' => 'mysql',
 	'persistent' => false,
 	'host' => '127.0.0.1',
-	'usr' => '',
-	'pass' => '',
+	'usr' => 'zouliming',
+	'pass' => 'caozuo',
 	'database' => 'calendar',
 	'encoding' => "utf8"
 );
