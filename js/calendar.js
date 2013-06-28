@@ -12,10 +12,24 @@
 		month: d.getMonth(),
 		current_year: d.getFullYear(),
 		tipsy_gravity: 's',
-		scroll_to_date: true
+		scroll_to_date: true,
+                note:[]
 	};
-
-	month_array = [
+        month_array = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December'
+	];
+	month_desc_array = [
 		'一月',
 		'二月',
 		'三月',
@@ -94,6 +108,9 @@
 		$_arrows = $('#arrows');
 		$_arrows.append('<div class=\"next\"></div>');
 		$_arrows.append('<div class=\"prev\"></div>');
+                
+                //添加按钮
+                $_calendar.append('<div id=\"add\">添加</div>');
 
 		// 为浮动元素添加一个clear标签
 		$_calendar.append('<div class=\"clear\"></div>');
@@ -104,7 +121,7 @@
 			// 添加一个滚动标记
 			$_calendar.append("<div id='" + o + "'></div>");
 
-			$.each(month_array[i], function(i, o) {
+			$.each(month_desc_array[i], function(i, o) {
 
 				// 循环字母,赋在div里面
 				$_calendar.append('<div class=\"label bold\">' + o + '</div>');
@@ -126,21 +143,26 @@
 			for (j = 1; j <= parseInt(month_days[i]); j++) {
 
 				// 检验是否是今天
-				var today = '';
+				var today = note = notevalue= nk = '';
 				if (i === pl.options.month && the_year === d.getFullYear()) {
 					if (j === pl.options.today) {
 						today = 'today';
 					}
 				}
+                                nk = the_year+'_'+i+'_'+j;
+                                if(pl.options.note.hasOwnProperty(nk)){
+                                        note = "note";
+                                        notevalue = pl.options.note[nk];
+                                }
 
 				// 循环数字,赋在div里面
-				$_calendar.append("<div data-date='" + (parseInt(i) + 1) + '/' + j + '/' + the_year + "' class='label day " + today + "'>" + j + '</div>');
+				$_calendar.append("<div data-content='"+notevalue+"' data-date='" + (parseInt(i) + 1) + '/' + j + '/' + the_year + "' class='label day " + today + note + "'>" + j + '</div>');
 			}
 
 			// 为浮动元素添加一个clear标签
 			$_calendar.append('<div class=\"clear\"></div>');
 		});
-
+                
 		// 循环这些元素,然后一个一个显示
 		for (k = 0; k < $('.label').length; k++) {
 			(function(j) {
@@ -148,18 +170,18 @@
 					// Fade the labels in
 					$($('.label')[j]).fadeIn('fast', function() {
 						// 这是要弹出的标签的内容
-						$(this).attr('original-title', pl.returnFormattedDate($(this).attr('data-date')));
+						$(this).attr('data-original-title', pl.returnFormattedDate($(this).attr('data-date')));
 
-						$(this).on('click', function() {
-							if (typeof pl.options.click_callback == 'function') {
-								var d = $(this).attr('data-date').split("/");
-								var dObj = {}
-								dObj.day = d[1];
-								dObj.month = d[0];
-								dObj.year = d[2];
-								pl.options.click_callback.call(this, dObj);
-							}
-						});
+//						$(this).on('click', function() {
+//							if (typeof pl.options.click_callback == 'function') {
+//								var d = $(this).attr('data-date').split("/");
+//								var dObj = {}
+//								dObj.day = d[1];
+//								dObj.month = d[0];
+//								dObj.year = d[2];
+//								pl.options.click_callback.call(this, dObj);
+//							}
+//						});
 					});
 				}, (k * 3));
 			})(k);
@@ -181,9 +203,23 @@
 				}
 			}, 200);
 		}
-
+                
+                $('.note').popover({
+                        'animation':'toggle',
+                        'placement':'top'
+                });
+                setTimeout("$('#add').fadeIn('slow','linear')",2000);
+                
+                $("#add").on('click',function(){
+                        console.log('sdfds');
+                        $('#myModal').modal({
+                                backdrop:true,
+                                keyboard:true,
+                                show:true
+                            });
+                });
 		// Tipsy
-		$('.label').tipsy({gravity: pl.options.tipsy_gravity});
+//		$('.label').tipsy({gravity: pl.options.tipsy_gravity});
 	}
 
 	// 前一年 / 下一年 的点击事件处理
@@ -237,5 +273,5 @@
 			}
 		});
 	}
-
+        
 })(jQuery, window, document);
