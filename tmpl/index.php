@@ -2,6 +2,9 @@
 <html lang="en">
         <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <meta http-equiv="pragma" content="no-cach" /> 
+                <meta http-equiv="cache-control" content="no-cache" /> 
+                <meta http-equiv="expires" content="0" />
                 <title>
                         日历笔记--精彩只为你而留
                 </title>
@@ -10,6 +13,7 @@
                 <!-- jCalendar CSS - Contains Tipsy CSS - Delete as needed -->
                 <link rel="stylesheet" href="css/rili.css" type="text/css" media="screen" title="no title" charset="utf-8">
                 <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen" title="no title" charset="utf-8">
+                <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         </head>
 
         <body>
@@ -34,7 +38,7 @@
                                         <div class="control-group">
                                                 <label class="control-label" for="input01">日期</label>
                                                 <div class="controls">
-                                                        <span class="input-xlarge uneditable-input" id="newDate"></span>
+                                                        <input class="input-xlarge uneditable-input" id="newDate" />
                                                 </div>
                                         </div>
                                         <div class="control-group">
@@ -56,51 +60,67 @@
                 <script src="js/tipsy.js" type="text/javascript" charset="utf-8"></script>
                 <script src="js/scrollTo.js" type="text/javascript" charset="utf-8"></script>
                 <script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+                <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
                 <script>
-                        var note = <?= json_encode($note) ?>;
+                        var noteArr = <?= json_encode($note) ?>;
                         $(document).ready(function() {
                                 $("#main-container").calendar({
                                         tipsy_gravity: 's', // How do you want to anchor the tipsy notification? (n / s / e / w)
 //                                        click_callback: calendar_callback, // Callback to return the clicked date
                                         year: "2013", // Optional, defaults to current year - pass in a year - Integer or String
                                         scroll_to_date: false, // Scroll to the current date?
-                                        note:note
+                                        note:noteArr
                                 });
-                                
-//                                $('.note').popover('toggle');
+                                $( "#newDate" ).datepicker({
+                                        'dateFormat':'yy-mm-dd'
+                                });
+                                $("#newDate").on('change',function(){
+                                        var d = $(this).val();
+                                        var dayNote = "";
+                                        if(noteArr.hasOwnProperty(d)){
+                                                dayNote = noteArr[d];
+                                        }
+                                        $("#newNote").val(dayNote);
+                                });
+                                $('#addNote').bind('click',function(){
+                                        var note = $('#newNote').val();
+                                        var dateValue = $('#newDate').val();
+                                        var d = dateValue.split("-");
+                                        month = d[1];
+                                        year = d[0];
+                                        day = d[2];
+                                        $.ajax({
+                                                type: "POST",
+                                                url: "add.php",
+                                                data: {year:year,month:month,day:day,note:note},
+                                                dataType:"json",
+                                                success: function(data){
+                                                        if(data==1){
+                                                                window.location.reload();
+//                                                                var s = parseInt(month)+"/"+parseInt(day)+"/"+year;
+//                                                                var editEle = $("div[data-date='"+s+"']");
+//                                                                $('#myModal').modal('hide');
+//                                                                noteArr[dateValue] = note;
+//                                                                editEle.addClass('note').attr('data-content',note);
+//                                                                $('.note').popover({
+//                                                                        'animation':'toggle',
+//                                                                        'placement':'top'
+//                                                                });
+                                                        }else{
+                                                                return false; 
+                                                        }
+                                                }
+                                        });
+                                });
                         });
 
                         //回调函数
                         var calendar_callback = function(date) {
                                 var k = date.year+"_"+date.month+"_"+date.day;
-                                console.log(k);
-                                if(note[k]){
-                                        alert(note[k]);
+                                if(noteArr[k]){
+                                        alert(noteArr[k]);
                                 }
                         }
-                        
-                        $('#addNote').bind('click',function(){
-                            var note = $('#newNote').val();
-                            var d = $('#newDate').html().split("-");
-                            month = d[1];
-                            year = d[0];
-                            day = d[2];
-                            $.ajax({
-                                type: "POST",
-                                url: "add.php",
-                                data: {year:year,month:month,day:day,note:note},
-                                dataType:"json",
-                                success: function(data){
-                                    if(data.status==1){
-                                        editEle.attr('original-title',note);
-                                    }else{
-                                       return false; 
-                                    }
-                                }
-                            });
-                            window.location.reload();
-                        });
-                    });
                 </script>
         </body>
 </html>

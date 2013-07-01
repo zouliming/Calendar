@@ -63,6 +63,7 @@
         -webkit-border-radius: 5px 5px 0 0;
         -moz-border-radius: 5px 5px 0 0;
         border-radius: 5px 5px 0 0;
+        text-align: center;
 }
 
 .popover-title:empty {
@@ -985,4 +986,41 @@ input[type="submit"].btn.btn-mini {
         -webkit-border-radius: 0 0 6px 6px;
         -moz-border-radius: 0 0 6px 6px;
         border-radius: 0 0 6px 6px;
+}
+
+
+/* form */
+label{
+        display: block;
+        margin-bottom: 5px;
+        line-height: 20px;
+}
+.form-horizontal .control-group {
+  margin-bottom: 20px;
+}
+.form-horizontal .control-group:before,
+.form-horizontal .control-group:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.form-horizontal .control-group:after {
+  clear: both;
+}
+.form-horizontal .control-label {
+  float: left;
+  width: 100px;
+  padding-top: 5px;
+  text-align: right;
+}
+
+.form-horizontal .controls {
+    margin-left: 120px;
+}
+.input-xlarge {
+  width: 270px;
+}
+input, textarea, .uneditable-input {
+    margin-left: 0;
 }

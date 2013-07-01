@@ -149,14 +149,16 @@
 						today = 'today';
 					}
 				}
-                                nk = the_year+'_'+i+'_'+j;
+                                var formatMonth = i<10?'0'+(i+1):(i+1);
+                                var formatDay = j<10?'0'+j:j;
+                                nk = the_year+'-'+formatMonth+'-'+formatDay;
                                 if(pl.options.note.hasOwnProperty(nk)){
                                         note = "note";
                                         notevalue = pl.options.note[nk];
                                 }
 
 				// 循环数字,赋在div里面
-				$_calendar.append("<div data-content='"+notevalue+"' data-date='" + (parseInt(i) + 1) + '/' + j + '/' + the_year + "' class='label day " + today + note + "'>" + j + '</div>');
+				$_calendar.append("<div data-content='"+notevalue+"' data-date='" + (parseInt(i) + 1) + '/' + j + '/' + the_year + "' class='label day " + today +" "+ note + "'>" + j + '</div>');
 			}
 
 			// 为浮动元素添加一个clear标签
@@ -211,7 +213,6 @@
                 setTimeout("$('#add').fadeIn('slow','linear')",2000);
                 
                 $("#add").on('click',function(){
-                        console.log('sdfds');
                         $('#myModal').modal({
                                 backdrop:true,
                                 keyboard:true,
