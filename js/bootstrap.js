@@ -839,7 +839,7 @@
 
 
         /* TOOLTIP PUBLIC CLASS DEFINITION
-  * =============================== */
+         * =============================== */
 
         var Tooltip = function (element, options) {
                 this.init('tooltip', element, options)
@@ -977,25 +977,25 @@
                                                 tp = {
                                                         top: pos.top + pos.height, 
                                                         left: pos.left + pos.width / 2 - actualWidth / 2
-                                                        }
+                                                }
                                                 break
                                         case 'top':
                                                 tp = {
                                                         top: pos.top - actualHeight, 
                                                         left: pos.left + pos.width / 2 - actualWidth / 2
-                                                        }
+                                                }
                                                 break
                                         case 'left':
                                                 tp = {
                                                         top: pos.top + pos.height / 2 - actualHeight / 2, 
                                                         left: pos.left - actualWidth
-                                                        }
+                                                }
                                                 break
                                         case 'right':
                                                 tp = {
                                                         top: pos.top + pos.height / 2 - actualHeight / 2, 
                                                         left: pos.left + pos.width
-                                                        }
+                                                }
                                                 break
                                 }
 
@@ -1177,7 +1177,7 @@
 
 
         /* TOOLTIP PLUGIN DEFINITION
-  * ========================= */
+        * ========================= */
 
         var old = $.fn.tooltip
 
@@ -1250,7 +1250,7 @@
 
 
         /* POPOVER PUBLIC CLASS DEFINITION
-  * =============================== */
+        * =============================== */
 
         var Popover = function (element, options) {
                 this.init('popover', element, options)
@@ -1258,7 +1258,7 @@
 
 
         /* NOTE: POPOVER EXTENDS BOOTSTRAP-TOOLTIP.js
-     ========================================== */
+        ========================================== */
 
         Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype, {
 
@@ -1310,7 +1310,7 @@
 
 
         /* POPOVER PLUGIN DEFINITION
-  * ======================= */
+        * ======================= */
 
         var old = $.fn.popover
 
@@ -1338,7 +1338,7 @@
 
 
         /* POPOVER NO CONFLICT
-  * =================== */
+        * =================== */
 
         $.fn.popover.noConflict = function () {
                 $.fn.popover = old
@@ -1373,7 +1373,7 @@
 
 
         /* AFFIX CLASS DEFINITION
-  * ====================== */
+        * ====================== */
 
         var Affix = function (element, options) {
                 this.options = $.extend({}, $.fn.affix.defaults, options)
@@ -1417,7 +1417,7 @@
 
 
         /* AFFIX PLUGIN DEFINITION
-  * ======================= */
+        * ======================= */
 
         var old = $.fn.affix
 

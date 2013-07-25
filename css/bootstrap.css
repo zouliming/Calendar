@@ -69,7 +69,6 @@
 .popover-title:empty {
         display: none;
 }
-
 .popover-content {
         padding: 9px 14px;
         font-size: 14px;
@@ -318,33 +317,22 @@ button.close {
         *margin-left: .3em;
         font-size: 14px;
         line-height: 20px;
-        color: #333333;
+        color: white;
         text-align: center;
-        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
         vertical-align: middle;
         cursor: pointer;
-        background-color: #f5f5f5;
-        *background-color: #e6e6e6;
-        background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-        background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-        background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-        background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+        background: none repeat scroll 0 0 #34495E;
         background-repeat: repeat-x;
-        border: 1px solid #cccccc;
+        border: medium none;
         *border: 0;
-        border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        border-bottom-color: #b3b3b3;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
         border-radius: 4px;
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
         filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
         *zoom: 1;
-        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        text-decoration: none;
+        transition: all 0.25s ease 0s;
 }
 
 .btn:hover,
@@ -369,13 +357,10 @@ button.close {
 
 .btn:hover,
 .btn:focus {
-        color: #333333;
+        background-color: #4E6D8D;
+        color: white;
+        transition: all 0.25s ease 0s;
         text-decoration: none;
-        background-position: 0 -15px;
-        -webkit-transition: background-position 0.1s linear;
-        -moz-transition: background-position 0.1s linear;
-        -o-transition: background-position 0.1s linear;
-        transition: background-position 0.1s linear;
 }
 
 .btn:focus {
@@ -473,20 +458,7 @@ input[type="button"].btn-block {
 }
 
 .btn-primary {
-        color: #ffffff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #006dcc;
-        *background-color: #0044cc;
-        background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
-        background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
-        background-image: -o-linear-gradient(top, #0088cc, #0044cc);
-        background-image: linear-gradient(to bottom, #0088cc, #0044cc);
-        background-repeat: repeat-x;
-        border-color: #0044cc #0044cc #002a80;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        background-color: #1ABC9C;
 }
 
 .btn-primary:hover,
@@ -495,9 +467,7 @@ input[type="button"].btn-block {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-        color: #ffffff;
-        background-color: #0044cc;
-        *background-color: #003bb3;
+        background-color: #2FE2BF;
 }
 
 .btn-primary:active,
@@ -506,20 +476,7 @@ input[type="button"].btn-block {
 }
 
 .btn-warning {
-        color: #ffffff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #faa732;
-        *background-color: #f89406;
-        background-image: -moz-linear-gradient(top, #fbb450, #f89406);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
-        background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
-        background-image: -o-linear-gradient(top, #fbb450, #f89406);
-        background-image: linear-gradient(to bottom, #fbb450, #f89406);
-        background-repeat: repeat-x;
-        border-color: #f89406 #f89406 #ad6704;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        background-color: #F1C40F;
 }
 
 .btn-warning:hover,
@@ -528,9 +485,7 @@ input[type="button"].btn-block {
 .btn-warning.active,
 .btn-warning.disabled,
 .btn-warning[disabled] {
-        color: #ffffff;
-        background-color: #f89406;
-        *background-color: #df8505;
+        background-color: #F4D03F;
 }
 
 .btn-warning:active,
@@ -539,20 +494,7 @@ input[type="button"].btn-block {
 }
 
 .btn-danger {
-        color: #ffffff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #da4f49;
-        *background-color: #bd362f;
-        background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
-        background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
-        background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
-        background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
-        background-repeat: repeat-x;
-        border-color: #bd362f #bd362f #802420;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        background-color: #E74C3C;
 }
 
 .btn-danger:hover,
@@ -561,9 +503,7 @@ input[type="button"].btn-block {
 .btn-danger.active,
 .btn-danger.disabled,
 .btn-danger[disabled] {
-        color: #ffffff;
-        background-color: #bd362f;
-        *background-color: #a9302a;
+        background-color: #EC7063;
 }
 
 .btn-danger:active,
@@ -572,20 +512,7 @@ input[type="button"].btn-block {
 }
 
 .btn-success {
-        color: #ffffff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #5bb75b;
-        *background-color: #51a351;
-        background-image: -moz-linear-gradient(top, #62c462, #51a351);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
-        background-image: -webkit-linear-gradient(top, #62c462, #51a351);
-        background-image: -o-linear-gradient(top, #62c462, #51a351);
-        background-image: linear-gradient(to bottom, #62c462, #51a351);
-        background-repeat: repeat-x;
-        border-color: #51a351 #51a351 #387038;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        background-color: #2ECC71;
 }
 
 .btn-success:hover,
@@ -605,20 +532,7 @@ input[type="button"].btn-block {
 }
 
 .btn-info {
-        color: #ffffff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #49afcd;
-        *background-color: #2f96b4;
-        background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
-        background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
-        background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
-        background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
-        background-repeat: repeat-x;
-        border-color: #2f96b4 #2f96b4 #1f6377;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        background-color: #3498DB;
 }
 
 .btn-info:hover,
@@ -627,9 +541,7 @@ input[type="button"].btn-block {
 .btn-info.active,
 .btn-info.disabled,
 .btn-info[disabled] {
-        color: #ffffff;
-        background-color: #2f96b4;
-        *background-color: #2a85a0;
+        background-color: #5DADE2;
 }
 
 .btn-info:active,
@@ -638,20 +550,7 @@ input[type="button"].btn-block {
 }
 
 .btn-inverse {
-        color: #ffffff;
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-        background-color: #363636;
-        *background-color: #222222;
-        background-image: -moz-linear-gradient(top, #444444, #222222);
-        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444444), to(#222222));
-        background-image: -webkit-linear-gradient(top, #444444, #222222);
-        background-image: -o-linear-gradient(top, #444444, #222222);
-        background-image: linear-gradient(to bottom, #444444, #222222);
-        background-repeat: repeat-x;
-        border-color: #222222 #222222 #000000;
-        border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        
 }
 
 .btn-inverse:hover,
@@ -660,9 +559,7 @@ input[type="button"].btn-block {
 .btn-inverse.active,
 .btn-inverse.disabled,
 .btn-inverse[disabled] {
-        color: #ffffff;
-        background-color: #222222;
-        *background-color: #151515;
+        
 }
 
 .btn-inverse:active,
@@ -996,31 +893,62 @@ label{
         line-height: 20px;
 }
 .form-horizontal .control-group {
-  margin-bottom: 20px;
+        margin-bottom: 20px;
 }
 .form-horizontal .control-group:before,
 .form-horizontal .control-group:after {
-  display: table;
-  line-height: 0;
-  content: "";
+        display: table;
+        line-height: 0;
+        content: "";
 }
 
 .form-horizontal .control-group:after {
-  clear: both;
+        clear: both;
 }
 .form-horizontal .control-label {
-  float: left;
-  width: 100px;
-  padding-top: 5px;
-  text-align: right;
+        float: left;
+        width: 100px;
+        padding-top: 5px;
+        text-align: right;
 }
 
 .form-horizontal .controls {
-    margin-left: 120px;
+        margin-left: 120px;
 }
 .input-xlarge {
-  width: 270px;
+        width: 270px;
 }
 input, textarea, .uneditable-input {
-    margin-left: 0;
+        margin-left: 0;
+}
+.uneditable-input{
+        background-color: #FCFCFC;
+        border-color: #CCCCCC;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.024) inset;
+        color: #999999;
+        cursor: not-allowed;
+        display: inline-block;
+}
+.help-block{
+        color: #7F8C8D;
+        font-size: 12px;
+}
+/* flat ui form */
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+        border: 2px solid #DCE4EC;
+        border-radius: 6px 6px 6px 6px;
+        box-shadow: none;
+        color: #34495E;
+        font-family: "Lato",sans-serif;
+        font-size: 14px;
+        /*padding: 8px 0 9px 10px;*/
+        padding: 4px 6px;
+        text-indent: 1px;
+        transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+        background-color: #FFFFFF;
+}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+        border-color: #1ABC9C;
+        box-shadow: none;
+        outline:none;
 }

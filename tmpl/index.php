@@ -38,13 +38,13 @@
                                         <div class="control-group">
                                                 <label class="control-label" for="input01">日期</label>
                                                 <div class="controls">
-                                                        <input class="input-xlarge uneditable-input" id="newDate" />
+                                                        <span class="input-xlarge uneditable-input" id="newDate" /></span>
                                                 </div>
                                         </div>
                                         <div class="control-group">
                                                 <label class="control-label" for="input01">笔记内容</label>
                                                 <div class="controls">
-                                                        <textarea style="width:330px;height: 150px;" id="newNote"></textarea>
+                                                        <textarea style="width:330px;height: 150px;" id="newNote" placeholder="写点什么?"></textarea>
                                                         <p class="help-block">暂时不支持Html</p>
                                                 </div>
                                         </div>
@@ -52,39 +52,72 @@
                         </div>
                         <div class="modal-footer">
                                 <a href="#" class="btn" data-dismiss="modal">关闭</a>
+                                <a href="#" class="btn btn-danger" id="deleteNote">删除</a>
                                 <a href="#" class="btn btn-primary" id="addNote">保存更新</a>
                         </div>
                 </div>
                 <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
                 <script src="js/calendar.js" type="text/javascript" charset="utf-8"></script>
-                <script src="js/tipsy.js" type="text/javascript" charset="utf-8"></script>
                 <script src="js/scrollTo.js" type="text/javascript" charset="utf-8"></script>
-                <script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+                <script src="js/popover.js" type="text/javascript" charset="utf-8"></script>
+                <script src="js/modal.js" type="text/javascript" charset="utf-8"></script>
+                <script src="js/transition.js" type="text/javascript" charset="utf-8"></script>
                 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
                 <script>
                         var noteArr = <?= json_encode($note) ?>;
+                        var calendar_callback = function(date) {
+                                if($(this).hasClass('note')){
+                                        $("#newNote").val($(this).data('content'));
+                                }else{
+                                        $("#newNote").val("");
+                                }
+                                var k = date.year+"-"+date.month+"-"+date.day;
+                                $("#newDate").data('dateEle',$(this)).html(k);
+                                $('#myModal').modal({
+                                        backdrop:true,
+                                        keyboard:true,
+                                        show:true
+                                });
+                        }
+                        var initPopver = function(){
+                                $('.note').popover({
+                                        'animation':'toggle',
+                                        'placement':'top',
+                                        'trigger':'hover'
+                                });
+                        }
+                        var after_callback = function(){
+                                $.each(noteArr,function(i,n){
+                                        $("div[data-date='"+i+"']").addClass('note').data('content',n);
+                                });
+                                initPopver();
+                        }
                         $(document).ready(function() {
                                 $("#main-container").calendar({
-                                        tipsy_gravity: 's', // How do you want to anchor the tipsy notification? (n / s / e / w)
-//                                        click_callback: calendar_callback, // Callback to return the clicked date
+                                        click_callback: calendar_callback, // Callback to return the clicked date
                                         year: "2013", // Optional, defaults to current year - pass in a year - Integer or String
-                                        scroll_to_date: false, // Scroll to the current date?
-                                        note:noteArr
+                                        scroll_to_date: true, // Scroll to the current date?
+                                        note:noteArr,
+                                        after_call:after_callback
                                 });
-                                $( "#newDate" ).datepicker({
-                                        'dateFormat':'yy-mm-dd'
-                                });
-                                $("#newDate").on('change',function(){
-                                        var d = $(this).val();
-                                        var dayNote = "";
-                                        if(noteArr.hasOwnProperty(d)){
-                                                dayNote = noteArr[d];
-                                        }
-                                        $("#newNote").val(dayNote);
+                                $("#deleteNote").on('click',function(){
+                                        $('#myModal').modal('hide');
+                                        var dateEle = $('#newDate').data('dateEle');
+                                        var dateValue = $('#newDate').html();
+                                        $.post('delete.php',{date:dateValue},function(data){
+                                                if(data==1){
+                                                        dateEle.data('popover').destroy();
+                                                        dateEle.removeClass('note').removeData('content');
+                                                }else{
+                                                        alert('删除失败');
+                                                }
+                                        });
+                                        initPopver();
+                                        $(window).scrollTo( dateEle, 800 );
                                 });
                                 $('#addNote').bind('click',function(){
                                         var note = $('#newNote').val();
-                                        var dateValue = $('#newDate').val();
+                                        var dateValue = $('#newDate').html();
                                         var d = dateValue.split("-");
                                         month = d[1];
                                         year = d[0];
@@ -96,16 +129,12 @@
                                                 dataType:"json",
                                                 success: function(data){
                                                         if(data==1){
-                                                                window.location.reload();
-//                                                                var s = parseInt(month)+"/"+parseInt(day)+"/"+year;
-//                                                                var editEle = $("div[data-date='"+s+"']");
-//                                                                $('#myModal').modal('hide');
-//                                                                noteArr[dateValue] = note;
-//                                                                editEle.addClass('note').attr('data-content',note);
-//                                                                $('.note').popover({
-//                                                                        'animation':'toggle',
-//                                                                        'placement':'top'
-//                                                                });
+                                                                var s = parseInt(month)+"/"+parseInt(day)+"/"+year;
+                                                                var editEle = $("div[data-date='"+s+"']");
+                                                                $('#myModal').modal('hide');
+                                                                noteArr[dateValue] = note;
+                                                                editEle.addClass('note').attr('data-content',note);
+                                                                initPopver();
                                                         }else{
                                                                 return false; 
                                                         }
@@ -113,14 +142,6 @@
                                         });
                                 });
                         });
-
-                        //回调函数
-                        var calendar_callback = function(date) {
-                                var k = date.year+"_"+date.month+"_"+date.day;
-                                if(noteArr[k]){
-                                        alert(noteArr[k]);
-                                }
-                        }
                 </script>
         </body>
 </html>

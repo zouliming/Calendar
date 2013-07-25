@@ -11,9 +11,7 @@
 		today: d.getDate(),
 		month: d.getMonth(),
 		current_year: d.getFullYear(),
-		tipsy_gravity: 's',
-		scroll_to_date: true,
-                note:[]
+		scroll_to_date: true
 	};
         month_array = [
 		'January',
@@ -64,7 +62,6 @@
 		pl = this;
 		this.element = element;
 		this.options = $.extend({}, defaults, options);
-        
 		this._defaults = defaults;
 		this._name = pluginName;
 
@@ -108,9 +105,6 @@
 		$_arrows = $('#arrows');
 		$_arrows.append('<div class=\"next\"></div>');
 		$_arrows.append('<div class=\"prev\"></div>');
-                
-                //添加按钮
-                $_calendar.append('<div id=\"add\">添加</div>');
 
 		// 为浮动元素添加一个clear标签
 		$_calendar.append('<div class=\"clear\"></div>');
@@ -143,28 +137,19 @@
 			for (j = 1; j <= parseInt(month_days[i]); j++) {
 
 				// 检验是否是今天
-				var today = note = notevalue= nk = '';
+				var today = '';
 				if (i === pl.options.month && the_year === d.getFullYear()) {
 					if (j === pl.options.today) {
 						today = 'today';
 					}
 				}
-                                var formatMonth = i<10?'0'+(i+1):(i+1);
-                                var formatDay = j<10?'0'+j:j;
-                                nk = the_year+'-'+formatMonth+'-'+formatDay;
-                                if(pl.options.note.hasOwnProperty(nk)){
-                                        note = "note";
-                                        notevalue = pl.options.note[nk];
-                                }
-
 				// 循环数字,赋在div里面
-				$_calendar.append("<div data-content='"+notevalue+"' data-date='" + (parseInt(i) + 1) + '/' + j + '/' + the_year + "' class='label day " + today +" "+ note + "'>" + j + '</div>');
+				$_calendar.append("<div data-date='" + (parseInt(i) + 1) + '/' + j + '/' + the_year + "' class='label day " + today + "'>" + j + '</div>');
 			}
-
 			// 为浮动元素添加一个clear标签
 			$_calendar.append('<div class=\"clear\"></div>');
 		});
-                
+
 		// 循环这些元素,然后一个一个显示
 		for (k = 0; k < $('.label').length; k++) {
 			(function(j) {
@@ -174,16 +159,16 @@
 						// 这是要弹出的标签的内容
 						$(this).attr('data-original-title', pl.returnFormattedDate($(this).attr('data-date')));
 
-//						$(this).on('click', function() {
-//							if (typeof pl.options.click_callback == 'function') {
-//								var d = $(this).attr('data-date').split("/");
-//								var dObj = {}
-//								dObj.day = d[1];
-//								dObj.month = d[0];
-//								dObj.year = d[2];
-//								pl.options.click_callback.call(this, dObj);
-//							}
-//						});
+						$(this).on('click', function() {
+							if (typeof pl.options.click_callback == 'function') {
+								var d = $(this).attr('data-date').split("/");
+								var dObj = {}
+								dObj.day = d[1];
+								dObj.month = d[0];
+								dObj.year = d[2];
+								pl.options.click_callback.call(this, dObj);
+							}
+						});
 					});
 				}, (k * 3));
 			})(k);
@@ -205,22 +190,10 @@
 				}
 			}, 200);
 		}
-                
-                $('.note').popover({
-                        'animation':'toggle',
-                        'placement':'top'
-                });
-                setTimeout("$('#add').fadeIn('slow','linear')",2000);
-                
-                $("#add").on('click',function(){
-                        $('#myModal').modal({
-                                backdrop:true,
-                                keyboard:true,
-                                show:true
-                            });
-                });
-		// Tipsy
-//		$('.label').tipsy({gravity: pl.options.tipsy_gravity});
+                //生成完元素后，触发这个事件
+                if(typeof pl.options.after_call == 'function'){
+                        pl.options.after_call.call();
+                }
 	}
 
 	// 前一年 / 下一年 的点击事件处理
