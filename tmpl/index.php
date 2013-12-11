@@ -83,7 +83,8 @@
                                 $('.note').popover({
                                         'animation':'toggle',
                                         'placement':'top',
-                                        'trigger':'hover'
+                                        'trigger':'hover',
+                                        'noCache':true
                                 });
                         }
                         var after_callback = function(){
@@ -133,8 +134,9 @@
                                                                 var editEle = $("div[data-date='"+s+"']");
                                                                 $('#myModal').modal('hide');
                                                                 noteArr[dateValue] = note;
-                                                                editEle.addClass('note').attr('data-content',note);
+                                                                editEle.addClass('note').data('content',note);
                                                                 initPopver();
+                                                                $(window).scrollTo( editEle, 800 );
                                                         }else{
                                                                 return false; 
                                                         }

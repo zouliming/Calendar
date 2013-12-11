@@ -473,9 +473,12 @@
                         , $e = this.$element
                         , o = this.options
 
-                        content = (typeof o.content == 'function' ? o.content.call($e[0]) :  o.content)
-                        || $e.attr('data-content')
-
+                        if(this.options.noCache==true){
+                              content = $e.data('content');
+                        }else{
+                                content = (typeof o.content == 'function' ? o.content.call($e[0]) :  o.content)
+                                || $e.data('content')
+                        }
                         return content
                 }
 
